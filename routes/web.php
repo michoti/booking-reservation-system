@@ -22,15 +22,20 @@ Route::get('/hotel/{id}/reservation', [ReservationController::class, 'create'])-
 Route::post('/hotel/{id}/reservation', [ReservationController::class, 'store'])->name('reservation.store');
 
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin', function(){ return to_route('filament.auth.login');});
+Route::middleware(['auth', 'verified'])->group(function () {    
+    // View and manage reservations
+    Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
+    Route::get('/reservation/{id}', [ReservationController::class, 'show'])->name('reservation.show');
+    Route::delete('/reservation/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
 });
 
 
+// Route::get('/admin/login', function(){ return to_route('filament.auth.login');});
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('filament.pages.dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

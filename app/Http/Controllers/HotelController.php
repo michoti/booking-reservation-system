@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hotel;
+use App\Models\RoomType;
 use Illuminate\Http\Request;
 
 class HotelController extends Controller
@@ -11,11 +12,20 @@ class HotelController extends Controller
     {
         $hotels = Hotel::orderBy('name', 'asc')->get();
 
-        return view('home', compact('hotels'));
+        return view('hotels.index', compact('hotels'));
     }
-    public function show(Hotel $id)
+    public function show($id)
     {
-        return view('hoteldetail');
+        $hotel = Hotel::findOrFail($id);
+        $roomtypes = RoomType::get();
+
+        // You can also load related data, such as room types, amenities, etc., here if needed
+
+        // Pass the hotel details to the view
+        return view('hotels.show', [
+            'hotel' => $hotel,
+            'roomtypes' => $roomtypes
+        ])->layout('layouts.guest');
     }
 
 }
