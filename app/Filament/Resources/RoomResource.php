@@ -27,7 +27,8 @@ class RoomResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('hotel_id')
                     ->tel()
-                    ->required(),
+                    ->required()
+                    ->sortable(),
                 Forms\Components\Select::make('room_type_id')
                     ->relationship('room_type', 'name')
                     ->required(),
@@ -59,14 +60,14 @@ class RoomResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -74,5 +75,5 @@ class RoomResource extends Resource
             'create' => Pages\CreateRoom::route('/create'),
             'edit' => Pages\EditRoom::route('/{record}/edit'),
         ];
-    }    
+    }
 }

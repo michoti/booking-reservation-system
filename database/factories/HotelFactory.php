@@ -17,9 +17,9 @@ class HotelFactory extends Factory
     public function definition(): array
     {
         return [
+        'city_id' => \App\Models\City::inRandomOrder()->first(),
         'name' => fake()->company(),
         'address' => fake()->streetAddress(),
-        'city' => fake()->city(),
         'state' => fake()->streetName(),
         'country' => fake()->country(),
         'zipcode' => fake()->postcode(),

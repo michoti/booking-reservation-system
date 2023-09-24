@@ -25,13 +25,13 @@ class HotelResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('city_id')
+                    ->required()
+                    ->maxLength(255),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('address')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('city')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('state')
@@ -52,9 +52,9 @@ class HotelResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('city_id'),
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('address'),
-                Tables\Columns\TextColumn::make('city'),
                 Tables\Columns\TextColumn::make('state'),
                 Tables\Columns\TextColumn::make('country'),
                 Tables\Columns\TextColumn::make('zipcode'),

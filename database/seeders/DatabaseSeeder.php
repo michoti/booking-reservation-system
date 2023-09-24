@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\City;
 use App\Models\Hotel;
 use App\Models\Reservation;
 use App\Models\Room;
@@ -20,23 +21,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Role::create(['name' => 'admin']);
+        $this->call([
+            UserSeeder::class,
+        ]); 
+        
 
-        $admin = User::factory()->create([
-            'email' => "admin@example.com",
-            'password' => Hash::make('Super_admin25')
-        ]);
-        $admin->assignRole('admin');
-        User::factory()->create([
-            'email' => "test@example.com",
-            'password' => Hash::make('Test_user25')
-        ]);
-
-        Hotel::factory(2)->create();
+        City::factory(2)->create();
+        
+        Hotel::factory(4)->create();
 
         RoomType::factory(2)->create();
 
-        Room::factory(10)->create();
+        Room::factory(15)->create();
 
         Reservation::factory(5)->create();
     }
